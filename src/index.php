@@ -25,17 +25,17 @@ Goal:
 You can check the source code: /index.php?source
 EOQ;
 
-if(array_key_exists("username", $_REQUEST)) { 
-    $link = mysql_connect('localhost', 'admin', 'admin'); 
-    mysql_select_db('chp_pwn', $link); 
+if(array_key_exists("username", $_POST)) { 
+    $link = mysqli_connect('127.0.0.1', 'admin', 'admin'); 
+    mysqli_select_db($link, 'chp_pwn');
 
-    $query = "SELECT * from users where username=\"".$_REQUEST["username"]."\""; 
+    $query = "SELECT * from users where username=\"".$_POST["username"]."\""; 
 
     echo "Executing query: $query\n";
 
-    $res = mysql_query($query, $link); 
+    $res = mysqli_query($link, $query); 
     if($res) { 
-      if(mysql_num_rows($res) > 0) { 
+      if(mysqli_num_rows($res) > 0) { 
           // echo "This user exists.<br>";
       } else { 
           // echo "This user doesn't exist.<br>";
@@ -44,5 +44,5 @@ if(array_key_exists("username", $_REQUEST)) {
         // echo "Error in query.<br>";
     }
 
-    mysql_close($link); 
+    mysqli_close($link); 
 }
